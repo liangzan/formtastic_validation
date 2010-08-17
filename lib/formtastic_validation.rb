@@ -3,9 +3,7 @@ module FormtasticValidation
   def self.included(base)
     base.class_eval do
       include ValidationMethods
-
-      alias_method :input_without_validation, :input
-      alias_method :input, :input_with_validation
+      alias_method_chain :input, :validation
     end
   end
 
