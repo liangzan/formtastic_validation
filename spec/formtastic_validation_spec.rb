@@ -47,6 +47,17 @@ describe "FormtasticValidation#input" do
           output_buffer.should have_tag('input[@two="two"]')
         end
 
+        it "should include the input_html" do
+          @bob.class.should_receive(:reflect_on_validations_for).with(:name).any_number_of_times.and_return([mock('MacroReflection', :macro => :validates_whatever, :name => :name, :options => {:one => 'one', :two => 'two'})])
+          semantic_form_for(@bob) do |builder|
+            concat(builder.input(:name, :input_html => {:three => 'three'}))
+          end
+          output_buffer.should have_tag('input[@validation="validates_whatever"]')
+          output_buffer.should have_tag('input[@one="one"]')
+          output_buffer.should have_tag('input[@two="two"]')
+          output_buffer.should have_tag('input[@three="three"]')
+        end
+
       end
 
     end
