@@ -34,7 +34,7 @@ describe "FormtasticValidation#input" do
             concat(builder.input(:name))
           end
           output_buffer.should have_tag('input[@validation="validates_whatever"]')
-          output_buffer.should have_tag('input[@one="one"]')
+          output_buffer.should have_tag('input[@validation_one="one"]')
         end
 
         it "should add multiple options as separate tags" do
@@ -43,8 +43,8 @@ describe "FormtasticValidation#input" do
             concat(builder.input(:name))
           end
           output_buffer.should have_tag('input[@validation="validates_whatever"]')
-          output_buffer.should have_tag('input[@one="one"]')
-          output_buffer.should have_tag('input[@two="two"]')
+          output_buffer.should have_tag('input[@validation_one="one"]')
+          output_buffer.should have_tag('input[@validation_two="two"]')
         end
 
         it "should include the input_html" do
@@ -53,8 +53,8 @@ describe "FormtasticValidation#input" do
             concat(builder.input(:name, :input_html => {:three => 'three'}))
           end
           output_buffer.should have_tag('input[@validation="validates_whatever"]')
-          output_buffer.should have_tag('input[@one="one"]')
-          output_buffer.should have_tag('input[@two="two"]')
+          output_buffer.should have_tag('input[@validation_one="one"]')
+          output_buffer.should have_tag('input[@validation_two="two"]')
           output_buffer.should have_tag('input[@three="three"]')
         end
 

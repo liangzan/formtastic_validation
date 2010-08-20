@@ -8,6 +8,8 @@ module FormtasticValidation
   end
 
   module ValidationMethods
+    NAMESPACE = 'validation'
+
     def input_with_validation(method, options = {})
       if has_validations?(method)
         options[:input_html] = validation_tags(method, options[:input_html])
@@ -55,8 +57,19 @@ module FormtasticValidation
       otags_array = tags.map do |tag|
         tag.delete_if { |key, value| key.eql?(:validation) }
       end
-      otags_array.inject { |memo, hash| memo.merge(hash) }
+      opts_hash = otags_array.inject { |memo, hash| memo.merge(hash) }
+      add_namespace(opts_hash)
     end
+
+    def add_namespace(opts_hash)
+      namespaced_hash = Hash.new
+      opts_hash.each do |key, value|
+        namespaced_key = (NAMESPACE + '_' + key.to_s).to_sym
+        namespaced_hash[namespaced_key] = value
+      end
+      namespaced_hash
+    end
+
   end
 end
 
