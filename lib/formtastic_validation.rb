@@ -58,7 +58,8 @@ module FormtasticValidation
         tag.delete_if { |key, value| key.eql?(:validation) }
       end
       opts_hash = otags_array.inject { |memo, hash| memo.merge(hash) }
-      add_namespace(opts_hash)
+      namespaced_hash = add_namespace(opts_hash)
+      serialise_options(namespaced_hash)
     end
 
     def add_namespace(opts_hash)
@@ -68,6 +69,15 @@ module FormtasticValidation
         namespaced_hash[namespaced_key] = value
       end
       namespaced_hash
+    end
+
+    def serialise_options(opts_hash)
+      serialised_hash = Hash.new
+      opts_hash.each do |key, value|
+        serialised_value = value.class.eql?(String) ? value : value.to_json
+        serialised_hash[key] = serialised_value
+      end
+      serialised_hash
     end
 
   end
