@@ -9,6 +9,7 @@ describe "FormtasticValidation#input" do
   end
 
   describe "validation and options attributes" do
+
     describe "when object is given" do
       describe 'and validations were called for the method' do
 
@@ -57,9 +58,36 @@ describe "FormtasticValidation#input" do
           output_buffer.should have_tag('input[@validation_two="two"]')
           output_buffer.should have_tag('input[@three="three"]')
         end
+      end
+    end
 
+    describe "validation options" do
+      it "should serialise regex as json strings" do
+        @bob.class.should_receive(:reflect_on_validations_for).with(:name).any_number_of_times.and_return([mock('MacroReflection', :macro => :validates_format_of, :name => :name, :options => {:with => /^a garden$/})])
+        semantic_form_for(@bob) do |builder|
+          concat(builder.input(:name))
+        end
+        output_buffer.should have_tag('input[@validation="validates_format_of"]')
+        output_buffer.should have_tag('input[@validation_with="/^a garden$/"]')
       end
 
+      it "should serialise array as json strings" do
+        @bob.class.should_receive(:reflect_on_validations_for).with(:name).any_number_of_times.and_return([mock('MacroReflection', :macro => :validates_inclusion_of, :name => :name, :options => {:in => %w(one two three)})])
+        semantic_form_for(@bob) do |builder|
+          concat(builder.input(:name))
+        end
+        output_buffer.should have_tag('input[@validation="validates_inclusion_of"]')
+        output_buffer.should have_tag(%\input[@validation_in='["one","two","three"]']\)
+      end
+
+      it "should serialise range as array" do
+        @bob.class.should_receive(:reflect_on_validations_for).with(:name).any_number_of_times.and_return([mock('MacroReflection', :macro => :validates_inclusion_of, :name => :name, :options => {:in => 1..3})])
+        semantic_form_for(@bob) do |builder|
+          concat(builder.input(:name))
+        end
+        output_buffer.should have_tag('input[@validation="validates_inclusion_of"]')
+        output_buffer.should have_tag(%\input[@validation_in='[1,2,3]']\)
+      end
     end
   end
 end
