@@ -17,3 +17,7 @@ Run this on the commandline
 <pre>
   $ yui-compressor -o build/formtastic_validation.min.js src/formtastic_validation.js
 </pre>
+
+h3. TODO
+
+set up rake tasks for both testing and building
