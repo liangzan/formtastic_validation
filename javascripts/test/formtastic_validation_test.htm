@@ -43,54 +43,100 @@
   </head>
   <body class="yui3-skin-sam yui-skin-sam" onload="initialize()">
     <script type="text/javascript">
-      YUI().use('node', 'console', 'test', function(Y) {
-      Y.namespace("formtastic_validation.test");
+        YUI().use('node', 'console', 'test', function(Y) {
+        Y.namespace("formtastic_validation.test");
+   
+        // Input tests
+        Y.formtastic_validation.test.InputTestCase = new Y.Test.Case({
+            name: "Inputs",
+            
+            "should return true for text, password, radio, checkbox. false otherwise" : function() {
+                var Assert = Y.Assert;
+                Assert.isTrue(isValidInputType("text"));
+                Assert.isTrue(isValidInputType("password"));
+                Assert.isTrue(isValidInputType("radio"));
+                Assert.isTrue(isValidInputType("checkbox"));
+                Assert.isFalse(isValidInputType("hidden"));
+                Assert.isFalse(isValidInputType("button"));
+                Assert.isFalse(isValidInputType("file"));
+                Assert.isFalse(isValidInputType("image"));
+                Assert.isFalse(isValidInputType("reset"));
+                Assert.isFalse(isValidInputType("submit"));
+            },
+       
+            "should select the valid input elements in an array" : function() {
+                var Assert = Y.Assert;
+	        var selectedInputs = selectInputElements();
+	        Assert.isArray(selectedInputs);
+	        Assert.areEqual(13, selectedInputs.length); // selected an extra yui test input element
+            },
 
-      // Input tests
-      Y.formtastic_validation.test.InputTestCase = new Y.Test.Case({
-      name: "Input Test Case",
-      
-      "Emacs should sing for me" : function () {
-      var Assert = Y.Assert;
-      Assert.areEqual(5, 5);
-      }
-      
-      });
+	    "should return the validation key" : function() {
+	        var Assert = Y.Assert;
+	        var key = extractValidationKey("validation_whatever_it_is");
+	        Assert.areEqual("whatever_it_is", key);
+	        key = extractValidationKey("validate_something_wrong");
+	        Assert.isNull(key);
+	    },
 
-      // Binding tests
-      Y.formtastic_validation.test.BindingTestCase = new Y.Test.Case({
-      name: "Binding Test Case",
-      
-      "Emacs should sing for me" : function () {
-      var Assert = Y.Assert;
-      Assert.areEqual(5, 5);
-      }
-      
-      });
+	    "should return the regex" : function() {
+	        var Assert = Y.Assert;
+	        var extractedRegex = extractFormatRegex("/^some\s(regex)[\d]+$/");
+	        Assert.areEqual("^some\s(regex)[\d]+$", extractedRegex);
+	    },
 
-      Y.formtastic_validation.test.TestSuite = new Y.Test.Suite("Test Suite");
-      Y.formtastic_validation.test.TestSuite.add(Y.formtastic_validation.test.InputTestCase);
-      Y.formtastic_validation.test.TestSuite.add(Y.formtastic_validation.test.BindingTestCase);
-      
-      //create the console
-      var r = new Y.Console({
-      newestOnTop : false,
-      style: 'block' // to anchor in the example content
-      });
-      
-      r.render('#testLogger');
-      
-      Y.Test.Runner.add(Y.formtastic_validation.test.TestSuite);
-      
-      //run the tests
-      Y.Test.Runner.run();
-      });
+	    "should return the confirmation id of the element" : function() {
+	        var Assert = Y.Assert;
+	        var selectedInputs = selectInputElements();
+	        Assert.areEqual("user_name_confirmation", confirmationID(selectedInputs[1]));
+	    },
+
+	    "should return the validation attributes of the element" : function() {
+	        var Assert = Y.Assert;
+	        var selectedInputs = selectInputElements();
+	        var validationAttributes = getValidationAttributes(selectedInputs[1]);
+	        Assert.isObject(validationAttributes);
+	        Assert.areEqual("you must have a name", validationAttributes.message);
+	        validationAttributes = getValidationAttributes(selectedInputs[2]);
+	        Assert.isObject(validationAttributes);
+	        Assert.areEqual("/someone@email/", validationAttributes.with);
+	    }
+        });
+   
+        // Binding tests
+        Y.formtastic_validation.test.BindingTestCase = new Y.Test.Case({
+        name: "Bindings",
+        
+        "Emacs should sing for me" : function() {
+        var Assert = Y.Assert;
+        Assert.areEqual(5, 5);
+        }
+        
+        });
+   
+        Y.formtastic_validation.test.TestSuite = new Y.Test.Suite("Test Suite");
+        Y.formtastic_validation.test.TestSuite.add(Y.formtastic_validation.test.InputTestCase);
+        Y.formtastic_validation.test.TestSuite.add(Y.formtastic_validation.test.BindingTestCase);
+        
+        //create the console
+        var r = new Y.Console({
+        newestOnTop : false,
+        style: 'block' // to anchor in the example content
+        });
+        
+        r.render('#testLogger');
+        
+        Y.Test.Runner.add(Y.formtastic_validation.test.TestSuite);
+        
+        //run the tests
+        Y.Test.Runner.run();
+        });
     </script>
 
     <form action="#" class="formtastic user" id="new_user" method="post"><div style="margin:0;padding:0;display:inline"><input name="authenticity_token" type="hidden" value="#" /></div>
       <fieldset class="inputs"><legend><span>User</span></legend><ol>
 	  <li class="string required" id="user_name_input"><label for="user_name">Name<abbr title="required">*</abbr></label><input id="user_name" maxlength="255" name="user[name]" size="50" type="text" validation="validates_presence_of" validation_message="you must have a name" /></li>
-	  <li class="string optional" id="user_email_input"><label for="user_email">Email</label><input id="user_email" maxlength="255" name="user[email]" size="50" type="text" validation="validates_format_of" validation_with="/someone@email\.com/" /></li>
+	  <li class="string optional" id="user_email_input"><label for="user_email">Email</label><input id="user_email" maxlength="255" name="user[email]" size="50" type="text" validation="validates_format_of" validation_with="/someone@email/" /></li>
 
 	  <li class="numeric optional" id="user_mobile_input"><label for="user_mobile">Mobile</label><input id="user_mobile" name="user[mobile]" size="50" type="text" validation="validates_length_of" validation_is="8" validation_message="its too short" /></li>
 	  <li class="numeric optional" id="user_age_input"><label for="user_age">Age</label><input id="user_age" name="user[age]" size="50" type="text" validation="validates_numericality_of" validation_message="Only 21 and above are allowed" validation_minimum="21" validation_only_integer="true" /></li>
