@@ -63,13 +63,11 @@ function extractValidationKey(key) {
     return result != null ? result[1] : null;
 }
 
-
 function extractFormatRegex(format) {
     var formatRegex = /^\/(.*)\/$/;
     var result = format.match(formatRegex);
     return result != null ? result[1] : null;
 }
-
 
 function confirmationID(element) {
     var elementID = element.getAttribute("id");
