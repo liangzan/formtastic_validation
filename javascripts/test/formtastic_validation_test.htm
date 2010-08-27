@@ -10,129 +10,22 @@
       padding:0;
       }
     </style>
-    <link type="text/css" rel="stylesheet" href="http://yui.yahooapis.com/3.1.2/build/cssfonts/fonts-min.css" />
-    <script type="text/javascript" charset="utf-8" src="http://yui.yahooapis.com/3.1.2/build/yui/yui-min.js"></script>
+    <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.1/build/logger/assets/logger.css">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.1/build/fonts/fonts-min.css" />
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.1/build/yuitest/assets/skins/sam/yuitest.css" />
+ 
+    <!-- Dependencies --> 
+    <script src="http://yui.yahooapis.com/2.8.1/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+    <script src="http://yui.yahooapis.com/2.8.1/build/event-simulate/event-simulate-min.js"></script>
+    <script src="http://yui.yahooapis.com/2.8.1/build/logger/logger-min.js"></script>
+ 
+    <!-- Source File -->
+    <script src="http://yui.yahooapis.com/2.8.1/build/yuitest/yuitest-min.js"></script>
     <script type="text/javascript" charset="utf-8" src="../lib/livevalidation.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="../src/formtastic_validation.js"></script>
-    <style type="text/css">
-      #testLogger {
-      margin-bottom: 1em;
-      }
-      
-      #testLogger .yui3-console .yui3-console-title {
-      border: 0 none;
-      color: #000;
-      font-size: 13px;
-      font-weight: bold;
-      margin: 0;
-      text-transform: none;
-      }
-      #testLogger .yui3-console .yui3-console-entry-meta {
-      margin: 0;
-      }
-      
-      .yui3-skin-sam .yui3-console-entry-pass .yui3-console-entry-cat {
-      background: #070;
-      color: #fff;
-      }
-      .yui3-skin-sam .yui3-console-entry-fail .yui3-console-entry-cat {
-      background: #700;
-      color: #fff;
-      }
-    </style>
   </head>
   <body class="yui3-skin-sam yui-skin-sam" onload="initialize()">
-    <script type="text/javascript">
-        YUI().use('node', 'console', 'test', function(Y) {
-        Y.namespace("formtastic_validation.test");
-   
-        // Input tests
-        Y.formtastic_validation.test.InputTestCase = new Y.Test.Case({
-            name: "Inputs",
-            
-            "should return true for text, password, radio, checkbox. false otherwise" : function() {
-                var Assert = Y.Assert;
-                Assert.isTrue(isValidInputType("text"));
-                Assert.isTrue(isValidInputType("password"));
-                Assert.isTrue(isValidInputType("radio"));
-                Assert.isTrue(isValidInputType("checkbox"));
-                Assert.isFalse(isValidInputType("hidden"));
-                Assert.isFalse(isValidInputType("button"));
-                Assert.isFalse(isValidInputType("file"));
-                Assert.isFalse(isValidInputType("image"));
-                Assert.isFalse(isValidInputType("reset"));
-                Assert.isFalse(isValidInputType("submit"));
-            },
-       
-            "should select the valid input elements in an array" : function() {
-                var Assert = Y.Assert;
-	        var selectedInputs = selectInputElements();
-	        Assert.isArray(selectedInputs);
-	        Assert.areEqual(13, selectedInputs.length); // selected an extra yui test input element
-            },
-
-	    "should return the validation key" : function() {
-	        var Assert = Y.Assert;
-	        var key = extractValidationKey("validation_whatever_it_is");
-	        Assert.areEqual("whatever_it_is", key);
-	        key = extractValidationKey("validate_something_wrong");
-	        Assert.isNull(key);
-	    },
-
-	    "should return the regex" : function() {
-	        var Assert = Y.Assert;
-	        var extractedRegex = extractFormatRegex("/^some\s(regex)[\d]+$/");
-	        Assert.areEqual("^some\s(regex)[\d]+$", extractedRegex);
-	    },
-
-	    "should return the confirmation id of the element" : function() {
-	        var Assert = Y.Assert;
-	        var selectedInputs = selectInputElements();
-	        Assert.areEqual("user_name_confirmation", confirmationID(selectedInputs[1]));
-	    },
-
-	    "should return the validation attributes of the element" : function() {
-	        var Assert = Y.Assert;
-	        var selectedInputs = selectInputElements();
-	        var validationAttributes = getValidationAttributes(selectedInputs[1]);
-	        Assert.isObject(validationAttributes);
-	        Assert.areEqual("you must have a name", validationAttributes.message);
-	        validationAttributes = getValidationAttributes(selectedInputs[2]);
-	        Assert.isObject(validationAttributes);
-	        Assert.areEqual("/someone@email/", validationAttributes.with);
-	    }
-        });
-   
-        // Binding tests
-        Y.formtastic_validation.test.BindingTestCase = new Y.Test.Case({
-        name: "Bindings",
-        
-        "Emacs should sing for me" : function() {
-        var Assert = Y.Assert;
-        Assert.areEqual(5, 5);
-        }
-        
-        });
-   
-        Y.formtastic_validation.test.TestSuite = new Y.Test.Suite("Test Suite");
-        Y.formtastic_validation.test.TestSuite.add(Y.formtastic_validation.test.InputTestCase);
-        Y.formtastic_validation.test.TestSuite.add(Y.formtastic_validation.test.BindingTestCase);
-        
-        //create the console
-        var r = new Y.Console({
-        newestOnTop : false,
-        style: 'block' // to anchor in the example content
-        });
-        
-        r.render('#testLogger');
-        
-        Y.Test.Runner.add(Y.formtastic_validation.test.TestSuite);
-        
-        //run the tests
-        Y.Test.Runner.run();
-        });
-    </script>
-
     <form action="#" class="formtastic user" id="new_user" method="post"><div style="margin:0;padding:0;display:inline"><input name="authenticity_token" type="hidden" value="#" /></div>
       <fieldset class="inputs"><legend><span>User</span></legend><ol>
 	  <li class="string required" id="user_name_input"><label for="user_name">Name<abbr title="required">*</abbr></label><input id="user_name" maxlength="255" name="user[name]" size="50" type="text" validation="validates_presence_of" validation_message="you must have a name" /></li>
@@ -157,5 +50,96 @@
       </ol></fieldset>
     </form>
 
+    <script type="text/javascript">
+        YAHOO.namespace("formtastic_validation.test");
+
+        // Input tests
+	YAHOO.formtastic_validation.test.InputTestCase = new YAHOO.tool.TestCase({
+            name: "Inputs",
+            
+            testValidInputType : function() {
+                var Assert = YAHOO.util.Assert;
+                Assert.isTrue(isValidInputType("text"));
+                Assert.isTrue(isValidInputType("password"));
+                Assert.isTrue(isValidInputType("radio"));
+                Assert.isTrue(isValidInputType("checkbox"));
+                Assert.isFalse(isValidInputType("hidden"));
+                Assert.isFalse(isValidInputType("button"));
+                Assert.isFalse(isValidInputType("file"));
+                Assert.isFalse(isValidInputType("image"));
+                Assert.isFalse(isValidInputType("reset"));
+                Assert.isFalse(isValidInputType("submit"));
+            },
+       
+            testSelectInputElements : function() {
+	        var Assert = YAHOO.util.Assert;
+	        var selectedInputs = selectInputElements();
+	        Assert.isArray(selectedInputs);
+	        Assert.areEqual(21, selectedInputs.length); // selected an extra yui test input element
+            },
+
+	    testExtractValidationKey : function() {
+	        var Assert = YAHOO.util.Assert;
+	        var key = extractValidationKey("validation_whatever_it_is");
+	        Assert.areEqual("whatever_it_is", key);
+	        key = extractValidationKey("validate_something_wrong");
+	        Assert.isNull(key);
+	    },
+
+	    "should return the regex" : function() {
+	        var Assert = YAHOO.util.Assert;
+	        var extractedRegex = extractFormatRegex("/^some\s(regex)[\d]+$/");
+	        Assert.areEqual("^some\s(regex)[\d]+$", extractedRegex);
+	    },
+
+	    "should return the confirmation id of the element" : function() {
+	        var Assert = YAHOO.util.Assert;
+	        var selectedInputs = selectInputElements();
+	        Assert.areEqual("user_name_confirmation", confirmationID(selectedInputs[1]));
+	    },
+
+	    "should return the validation attributes of the element" : function() {
+	        var Assert = YAHOO.util.Assert;
+	        var selectedInputs = selectInputElements();
+	        var validationAttributes = getValidationAttributes(selectedInputs[1]);
+	        Assert.isObject(validationAttributes);
+	        Assert.areEqual("you must have a name", validationAttributes.message);
+	        validationAttributes = getValidationAttributes(selectedInputs[2]);
+	        Assert.isObject(validationAttributes);
+	        Assert.areEqual("/someone@email/", validationAttributes.with);
+	    }
+        });
+   
+        // Binding tests
+        YAHOO.formtastic_validation.test.BindingTestCase = new YAHOO.tool.TestCase({
+	    name: "Bindings",
+	 
+	   testBindings : function() {
+		var Assert = YAHOO.util.Assert;
+		var textField = document.getElementById("user_name");
+		Assert.isNotNull(textField);
+	        YAHOO.util.UserAction.keypress(textField, {charCode: 97});
+	        YAHOO.util.UserAction.keyup(textField);
+ 	        this.wait(function() {
+  	            var validationElement = textField.nextSibling;
+		    Assert.isNotNull(validationElement);
+		}, 100);
+	    }
+	 
+	});
+    
+	YAHOO.formtastic_validation.test.TestSuite = new YAHOO.tool.TestSuite("Formtastic Validation Test Suite");
+        YAHOO.formtastic_validation.test.TestSuite.add(YAHOO.formtastic_validation.test.InputTestCase);
+        YAHOO.formtastic_validation.test.TestSuite.add(YAHOO.formtastic_validation.test.BindingTestCase);
+         
+        YAHOO.util.Event.onDOMReady(function (){
+            //create the logger
+            var logger = new YAHOO.tool.TestLogger("testLogger");
+            YAHOO.tool.TestRunner.add(YAHOO.formtastic_validation.test.TestSuite);
+     
+            //run the tests
+            YAHOO.tool.TestRunner.run();
+        });
+    </script>
   </body>
 </html>
