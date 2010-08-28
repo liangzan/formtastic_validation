@@ -5,25 +5,8 @@
  */
 var FormtasticValidation = function() {
     this.VERSION = "0.1.0";
-};
 
-FormtasticValidation.prototype = {
-    initialize: function() {
-	var textInputs = this.selectInputElements();
-	var validations, validationTypes, validationOptions;
-	for (var i = 0; i < textInputs.length; i++) {
-	    validations = textInputs[i].getAttribute("validation");
-	    if (validations != null) {
-		validationTypes = validations.split(" ");
-		for (var j = 0; j < validationTypes.length; j++) {
-		    validationOptions = this.getValidationAttributes(textInputs[i]);
-		    this.bindInputElements(textInputs[i], validationTypes[j], validationOptions);
-		}
-	    }
-	}
-    },
-
-    selectInputElements: function() {
+    this.selectInputElements = function() {
 	var inputElements = document.getElementsByTagName('input');
 	var textInputs = new Array;
 	for (var i = 0; i < inputElements.length; i++) {
@@ -34,9 +17,9 @@ FormtasticValidation.prototype = {
 	    }
 	}
 	return textInputs;    
-    },
+    };
 
-    isValidInputType: function(type) {
+    this.isValidInputType = function(type) {
 	switch(type) {
 	case "text":
 	case "password":
@@ -46,9 +29,9 @@ FormtasticValidation.prototype = {
 	default:
 	    return false;
 	}
-    },
+    };
 
-    getValidationAttributes: function(element) {
+    this.getValidationAttributes = function(element) {
 	var validationOptions = {};
 	var elementAttributes = element.attributes;
 	var validationKey, validationValue;
@@ -60,26 +43,26 @@ FormtasticValidation.prototype = {
 	    }
 	}
 	return validationOptions;
-    },
+    };
 
-    extractValidationKey: function(key) {
+    this.extractValidationKey = function(key) {
 	var namespaceRegex = /validation_(\w+)/;
 	var result = key.match(namespaceRegex);
 	return result != null ? result[1] : null;
-    },
-
-    extractFormatRegex: function(format) {
+    };
+    
+    this.extractFormatRegex = function(format) {
 	var formatRegex = /^\/(.*)\/$/;
 	var result = format.match(formatRegex);
 	return result != null ? result[1] : null;
-    },
+    };
 
-    confirmationID: function(element) {
+    this.confirmationID = function(element) {
 	var elementID = element.getAttribute("id");
 	return elementID + "_confirmation";
-    },
+    };
 
-    bindInputElements: function(element, validation, options) {
+    this.bindInputElements = function(element, validation, options) {
 	var elementValidation = new LiveValidation(element);
 	var formatRegex, confirmationElement;
 	
@@ -111,6 +94,21 @@ FormtasticValidation.prototype = {
 	case "validates_presence_of":
 	    elementValidation.add(Validate.Presence, {failureMessage: options["message"]});
 	    break;
+	}
+    };
+};
+
+FormtasticValidation.prototype.initialize = function() {
+    var textInputs = this.selectInputElements();
+    var validations, validationTypes, validationOptions;
+    for (var i = 0; i < textInputs.length; i++) {
+	validations = textInputs[i].getAttribute("validation");
+	if (validations != null) {
+	    validationTypes = validations.split(" ");
+	    for (var j = 0; j < validationTypes.length; j++) {
+		validationOptions = this.getValidationAttributes(textInputs[i]);
+		this.bindInputElements(textInputs[i], validationTypes[j], validationOptions);
+	    }
 	}
     }
 };
