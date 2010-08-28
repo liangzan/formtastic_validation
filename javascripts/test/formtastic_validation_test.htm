@@ -24,6 +24,12 @@
     <script src="http://yui.yahooapis.com/2.8.1/build/yuitest/yuitest-min.js"></script>
     <script type="text/javascript" charset="utf-8" src="../lib/livevalidation.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="../src/formtastic_validation.js"></script>
+    <script type="text/javascript">
+      var initialize = function() {
+          var formtasticValidation = new FormtasticValidation;
+          formtasticValidation.initialize();
+      }
+    </script>
   </head>
   <body class="yui3-skin-sam yui-skin-sam" onload="initialize()">
     <form action="#" class="formtastic user" id="new_user" method="post"><div style="margin:0;padding:0;display:inline"><input name="authenticity_token" type="hidden" value="#" /></div>
