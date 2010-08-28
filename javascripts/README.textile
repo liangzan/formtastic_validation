@@ -2,13 +2,13 @@ h1. Formtastic Validation JS Lib
 
 h2. Dependencies
 
-This lib uses "YUI 3 Test":http://developer.yahoo.com/yui/3/test for unit testing. Minifying is done using "yui-compressor":http://developer.yahoo.com/yui/compressor/
+Minifying is done using "yui-compressor":http://developer.yahoo.com/yui/compressor/
 
 Do install yui-compressor before attempting to build the files.
 
 h2. Testing
 
-Open the formtastic_validation_test.htm file under the test directory. Modify the tests in the htm file directly.
+Testing is done using cuucmber on the formtastic validation app
 
 h2. Building
 
@@ -18,6 +18,3 @@ Run this on the commandline
   $ yui-compressor -o build/formtastic_validation.min.js src/formtastic_validation.js
 </pre>
 
-h3. TODO
-
-set up rake tasks for both testing and building
