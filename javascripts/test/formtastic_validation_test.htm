@@ -29,9 +29,9 @@
     <form action="#" class="formtastic user" id="new_user" method="post"><div style="margin:0;padding:0;display:inline"><input name="authenticity_token" type="hidden" value="#" /></div>
       <fieldset class="inputs"><legend><span>User</span></legend><ol>
 	  <li class="string required" id="user_name_input"><label for="user_name">Name<abbr title="required">*</abbr></label><input id="user_name" maxlength="255" name="user[name]" size="50" type="text" validation="validates_presence_of" validation_message="you must have a name" /></li>
-	  <li class="string optional" id="user_email_input"><label for="user_email">Email</label><input id="user_email" maxlength="255" name="user[email]" size="50" type="text" validation="validates_format_of" validation_with="/someone@email/" /></li>
+	  <li class="string optional" id="user_email_input"><label for="user_email">Email</label><input id="user_email" maxlength="255" name="user[email]" size="50" type="text" validation="validates_format_of" validation_with="/a@a/" /></li>
 
-	  <li class="numeric optional" id="user_mobile_input"><label for="user_mobile">Mobile</label><input id="user_mobile" name="user[mobile]" size="50" type="text" validation="validates_length_of" validation_is="8" validation_message="its too short" /></li>
+	  <li class="numeric optional" id="user_mobile_input"><label for="user_mobile">Mobile</label><input id="user_mobile" name="user[mobile]" size="50" type="text" validation="validates_length_of" validation_is="3" validation_message="its too short" /></li>
 	  <li class="numeric optional" id="user_age_input"><label for="user_age">Age</label><input id="user_age" name="user[age]" size="50" type="text" validation="validates_numericality_of" validation_message="Only 21 and above are allowed" validation_minimum="21" validation_only_integer="true" /></li>
 	  <li class="string optional" id="user_gender_input"><label for="user_gender">Gender</label><input id="user_gender" maxlength="255" name="user[gender]" size="50" type="text" validation="validates_inclusion_of" validation_in="[&quot;male&quot;,&quot;female&quot;]" /></li>
 	  <li class="string optional" id="user_address_input"><label for="user_address">Address</label><input id="user_address" maxlength="255" name="user[address]" size="50" type="text" validation="validates_exclusion_of" validation_in="[&quot;cafe&quot;,&quot;bar&quot;]" /></li>
@@ -110,27 +110,8 @@
 	    }
         });
    
-        // Binding tests
-        YAHOO.formtastic_validation.test.BindingTestCase = new YAHOO.tool.TestCase({
-	    name: "Bindings",
-	 
-	   testBindings : function() {
-		var Assert = YAHOO.util.Assert;
-		var textField = document.getElementById("user_name");
-		Assert.isNotNull(textField);
-	        YAHOO.util.UserAction.keypress(textField, {charCode: 97});
-	        YAHOO.util.UserAction.keyup(textField);
- 	        this.wait(function() {
-  	            var validationElement = textField.nextSibling;
-		    Assert.isNotNull(validationElement);
-		}, 100);
-	    }
-	 
-	});
-    
 	YAHOO.formtastic_validation.test.TestSuite = new YAHOO.tool.TestSuite("Formtastic Validation Test Suite");
         YAHOO.formtastic_validation.test.TestSuite.add(YAHOO.formtastic_validation.test.InputTestCase);
-        YAHOO.formtastic_validation.test.TestSuite.add(YAHOO.formtastic_validation.test.BindingTestCase);
          
         YAHOO.util.Event.onDOMReady(function (){
             //create the logger
