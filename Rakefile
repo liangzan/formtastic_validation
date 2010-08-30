@@ -5,12 +5,19 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "formtastic_validation"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = %Q{Client side validation with formtastic}
+    gem.description = %Q{A formtastic extension that does client side validation}
     gem.email = "zan@liangzan.net"
     gem.homepage = "http://github.com/liangzan/formtastic_validation"
     gem.authors = ["Wong Liang Zan"]
-    gem.add_development_dependency "rspec", ">= 1.2.9"
+    gem.add_dependency "validation_reflection", "= 0.3.8"
+    gem.add_dependency "formtastic", "= 1.0.0"
+    gem.add_development_dependency "rspec", "= 1.3.0"
+    gem.add_development_dependency "rspec-rails", "= 1.3.2"	
+    gem.add_development_dependency "rspec_tag_matchers", "= 1.0.0"
+    gem.add_development_dependency "nokogiri", "= 1.4.2"
+    gem.add_development_dependency "activesupport", "= 2.3.8"
+    gem.add_development_dependency "actionpack", "= 2.3.8"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
