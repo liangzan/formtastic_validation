@@ -1,0 +1,1 @@
+require 'formtastic_validation'
