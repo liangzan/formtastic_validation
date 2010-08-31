@@ -48,10 +48,11 @@ After that you need to add this to your application layout
 </html>
 </pre>
 
-Two things to add:
+What the above does:
 
-* include the livevalidation and formtastic_validation javascript files
-* run a function that instantiates a FormatasticValidation object and let it call initialize()
+* it included the livevalidation and formtastic_validation javascript files
+* it ran a function that instantiates a FormatasticValidation object and let it call initialize()
+
 h2. Usage
 
 There is nothing to change in your existing code. You should see "Thankyou!" appearing next to fields which passed the validations. Forms which do not fufil the validations will fail to submit.

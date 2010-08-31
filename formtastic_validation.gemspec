@@ -14,15 +14,16 @@ Gem::Specification.new do |s|
   s.email = %q{zan@liangzan.net}
   s.extra_rdoc_files = [
     "LICENSE",
-     "README.rdoc"
+     "README.textile"
   ]
   s.files = [
     ".document",
      ".gitignore",
      "LICENSE",
-     "README.rdoc",
+     "README.textile",
      "Rakefile",
      "VERSION",
+     "formtastic_validation.gemspec",
      "javascripts/README.textile",
      "javascripts/build/formtastic_validation-0.1.0.min.js",
      "javascripts/lib/livevalidation-1.3.min.js",
