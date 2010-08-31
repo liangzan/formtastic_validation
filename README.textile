@@ -2,13 +2,13 @@ h1. formtastic_validation
 
 h2. Introduction
 
-Formtastic validation adds client side validation to your forms.
+Formtastic validation adds client side validation to your forms. Visit the "demo app":http://formtastic-validation-app.heroku.com/ and its "repo":http://github.com/liangzan/formtastic_validation_app to see it in action.
 
 h2. Features
 
-* works with existing formtastic code
-* javascript agnostic
-* no complicated AJAX. its completely javascript driven
+* works with existing formtastic code. no need to modify anything
+* javascript lib agnostic. 
+* no AJAX that pounds your servers. its completely client side javascript
 * unobtrusive and very light weight
 
 h2. Dependencies

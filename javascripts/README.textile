@@ -8,7 +8,7 @@ Do install yui-compressor before attempting to build the files.
 
 h2. Testing
 
-Testing is done using cuucmber on the formtastic validation app
+Testing is done using cucmber on the formtastic validation "demo app":http://github.com/liangzan/formtastic_validation_app
 
 h2. Building
 
