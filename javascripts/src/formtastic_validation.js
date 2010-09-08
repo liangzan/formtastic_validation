@@ -71,7 +71,7 @@ var FormtasticValidation = function() {
 	    elementValidation.add(Validate.Acceptance, {failureMessage: options["message"]});
 	    break;
 	case "validates_confirmation_of":
-	    confirmationElement = new LiveValidation(this.confirmationID(element));
+	    confirmationElement = new LiveValidation(this.confirmationID(element), {validMessage: options["valid_message"]});
 	    confirmationElement.add(Validate.Confirmation, {match: element, failureMessage: options["message"]});
 	    break;
 	case "validates_exclusion_of":
