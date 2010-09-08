@@ -1,6 +1,11 @@
+require 'rubygems'
+require 'active_support'
+
 module FormtasticValidation
 
   NAMESPACE = 'validation'
+  @@valid_message = "Thank you!"
+  mattr_accessor :valid_message
 
   def self.included(base)
     base.class_eval {
@@ -30,9 +35,13 @@ module FormtasticValidation
   def validation_tags(attribute, input_html)
     tags = []
     @object.class.reflect_on_validations_for(attribute).each do |validation|
-      tags << { :validation => validation.macro }.merge(validation.options)
+      tags << { :validation => validation.macro }.merge(validation.options.merge(validation_valid_message_tag))
     end
     stack_tags(tags, input_html)
+  end
+
+  def validation_valid_message_tag
+    { :valid_message => @@valid_message }
   end
 
   def stack_tags(tags, input_html)
