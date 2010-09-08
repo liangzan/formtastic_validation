@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{formtastic_validation}
-  s.version = "0.1.1"
+  s.version = "0.1.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Wong Liang Zan"]
@@ -27,12 +27,13 @@ Gem::Specification.new do |s|
      "javascripts/README.textile",
      "javascripts/build/formtastic_validation-0.1.0.min.js",
      "javascripts/build/formtastic_validation-0.1.1.min.js",
+     "javascripts/build/formtastic_validation-0.1.2.min.js",
      "javascripts/lib/livevalidation-1.3.min.js",
      "javascripts/src/formtastic_validation.js",
      "lib/formtastic_validation.rb",
      "rails_generators/formtastic_validation/formtastic_validation_generator.rb",
      "rails_generators/formtastic_validation/templates/config/initializers/formtastic_validation.rb",
-     "rails_generators/formtastic_validation/templates/public/javascripts/formtastic_validation-0.1.0.min.js",
+     "rails_generators/formtastic_validation/templates/public/javascripts/formtastic_validation-0.1.2.min.js",
      "rails_generators/formtastic_validation/templates/public/javascripts/livevalidation-1.3.min.js",
      "spec/formtastic_validation_spec.rb",
      "spec/spec.opts",
