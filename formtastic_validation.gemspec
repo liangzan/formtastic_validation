@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{formtastic_validation}
-  s.version = "0.1.0"
+  s.version = "0.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Wong Liang Zan"]
-  s.date = %q{2010-08-31}
+  s.date = %q{2010-09-08}
   s.description = %q{A formtastic extension that does client side validation}
   s.email = %q{zan@liangzan.net}
   s.extra_rdoc_files = [
@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
      "formtastic_validation.gemspec",
      "javascripts/README.textile",
      "javascripts/build/formtastic_validation-0.1.0.min.js",
+     "javascripts/build/formtastic_validation-0.1.1.min.js",
      "javascripts/lib/livevalidation-1.3.min.js",
      "javascripts/src/formtastic_validation.js",
      "lib/formtastic_validation.rb",
