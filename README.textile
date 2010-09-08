@@ -63,6 +63,10 @@ There is nothing to change in your existing code. You should see "Thankyou!" app
 
 Validation options work.
 
+h2. Configuration
+
+The valid message can be changed in the formtastic_validation configuration file under config/initializers
+
 h2. CSS Styling
 
 You can style the validation messages with the css selectors
