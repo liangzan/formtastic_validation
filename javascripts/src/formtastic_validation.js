@@ -63,7 +63,7 @@ var FormtasticValidation = function() {
     };
 
     this.bindInputElements = function(element, validation, options) {
-	var elementValidation = new LiveValidation(element);
+	var elementValidation = new LiveValidation(element, {validMessage: options["valid_message"]});
 	var formatRegex, confirmationElement;
 	
 	switch(validation) {
