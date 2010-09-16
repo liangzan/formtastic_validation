@@ -26,7 +26,7 @@ describe "FormtasticValidation#input" do
           semantic_form_for(@bob) do |builder|
             concat(builder.input(:name))
           end
-          output_buffer.should have_tag('input[@validation_valid_message="valid!"]')
+          output_buffer.should have_tag('input[@validation_valid_message="Thank you!"]')
         end
 
         it 'should allow changes to the valid message tag' do
