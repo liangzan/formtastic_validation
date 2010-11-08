@@ -10,7 +10,7 @@ begin
     gem.email = "zan@liangzan.net"
     gem.homepage = "http://github.com/liangzan/formtastic_validation"
     gem.authors = ["Wong Liang Zan"]
-    gem.add_dependency "validation_reflection", "~>= 1.0.0"
+    gem.add_dependency "validation_reflection", "~> 1.0.0"
     gem.add_dependency "formtastic", "~> 1.1.0"
     gem.add_development_dependency "rspec", "= 1.3.0"
     gem.add_development_dependency "rspec-rails", "= 1.3.2"	
