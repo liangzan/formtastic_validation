@@ -23,14 +23,14 @@ h2. Installation
   $ gem install formtastic_validation
 </pre>
  
-Remember to add the gem into your config
+Remember to add the gem into your bundler Gemfile
 
 Then run the generators to add the files on
 
 From your rails root directory:
 
 <pre>
-  $ script/generate formtastic_validation
+  $ rails generate formtastic_validation
 </pre>
 
 This adds a configuration file to config/initializers and a couple of javascript files to public/javascripts
@@ -40,7 +40,7 @@ After that you need to add this to your application layout
 <pre>
   <head>
     <%= javascript_include_tag 'livevalidation-1.3.min' %>
-    <%= javascript_include_tag 'formtastic_validation-0.1.2.min' %>
+    <%= javascript_include_tag 'formtastic_validation-0.1.3.min' %>
     <script type="text/javascript">
       function initialize() {
           var formtasticValidation = new FormtasticValidation;
@@ -77,9 +77,15 @@ You can style the validation messages with the css selectors
 .LV_invalid { ... }              /* for invalid messages */
 </pre>
 
-h2. Caveats
+h2. Compatibility
 
-This gem is Rails 2 compatible. Rails 3 update is coming....
+This gem is Rails 2 and 3 compatible. 
+
+h2. Upgrading
+
+Existing users need not change anything from the upgrade from rails 2 to 3.
+
+h2. Caveats
 
 Only the following validations work:
 
