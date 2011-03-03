@@ -21,6 +21,23 @@ describe "FormtasticValidation#input" do
           output_buffer.should have_tag('input[@validation="validates_whatever"]')
         end
 
+        it 'should add a valid message tag' do
+          @bob.class.should_receive(:reflect_on_validations_for).with(:name).any_number_of_times.and_return([mock('MacroReflection', :macro => :validates_whatever, :name => :name, :options => {})])
+          semantic_form_for(@bob) do |builder|
+            concat(builder.input(:name))
+          end
+          output_buffer.should have_tag('input[@validation_valid_message="Thank you!"]')
+        end
+
+        it 'should allow changes to the valid message tag' do
+          @bob.class.should_receive(:reflect_on_validations_for).with(:name).any_number_of_times.and_return([mock('MacroReflection', :macro => :validates_whatever, :name => :name, :options => {})])
+          FormtasticValidation.valid_message = "Its correct!"
+          semantic_form_for(@bob) do |builder|
+            concat(builder.input(:name))
+          end
+          output_buffer.should have_tag('input[@validation_valid_message="Its correct!"]')
+        end
+
         it "should add multiple validation tags separated by space" do
           @bob.class.should_receive(:reflect_on_validations_for).with(:name).any_number_of_times.and_return([mock('MacroReflection', :macro => :validates_whatever, :name => :name, :options => {}), mock('MacroReflection', :macro => :validates_anything, :name => :name, :options => {})])
           semantic_form_for(@bob) do |builder|

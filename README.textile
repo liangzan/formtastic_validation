@@ -1,0 +1,122 @@
+h1. formtastic_validation
+
+h2. Introduction
+
+Formtastic validation adds client side validation to your forms. Visit the "demo app":http://formtastic-validation-app.heroku.com/ and its "repo":http://github.com/liangzan/formtastic_validation_app to see it in action.
+
+h2. Features
+
+* works with existing formtastic code. no need to modify anything
+* javascript lib agnostic. 
+* no AJAX that pounds your servers. its completely client side javascript
+* unobtrusive and very light weight
+
+h2. Dependencies
+
+* "Formtastic":http://github.com/justinfrench/formtastic
+* "Validation Reflection":http://github.com/redinger/validation_reflection
+* "Live validation":http://github.com/alechill/livevalidation
+
+h2. Installation
+
+<pre>
+  $ gem install formtastic_validation
+</pre>
+ 
+Remember to add the gem into your bundler Gemfile
+
+Then run the generators to add the files on
+
+From your rails root directory:
+
+<pre>
+  $ rails generate formtastic_validation
+</pre>
+
+This adds a configuration file to config/initializers and a couple of javascript files to public/javascripts
+
+After that you need to add this to your application layout
+
+<pre>
+  <head>
+    <%= javascript_include_tag 'livevalidation-1.3.min' %>
+    <%= javascript_include_tag 'formtastic_validation-0.1.3.min' %>
+    <script type="text/javascript">
+      function initialize() {
+          var formtasticValidation = new FormtasticValidation;
+          formtasticValidation.initialize();
+      }
+    </script>
+  </head>
+  <body onload="initialize()">
+  </body>
+</pre>
+
+What the above does:
+
+* it included the livevalidation and formtastic_validation javascript files
+* it ran a function that instantiates a FormatasticValidation object and let it call initialize()
+
+h2. Usage
+
+There is nothing to change in your existing code. You should see "Thankyou!" appearing next to fields which passed the validations. Forms which do not fufil the validations will fail to submit.
+
+Validation options work.
+
+h2. Configuration
+
+The valid message can be changed in the formtastic_validation configuration file under config/initializers
+
+h2. CSS Styling
+
+You can style the validation messages with the css selectors
+
+<pre>
+.LV_validation_message { ... }   /* the validation message */
+.LV_valid { ... }                /* for valid messages */
+.LV_invalid { ... }              /* for invalid messages */
+</pre>
+
+h2. Compatibility
+
+This gem is Rails 2 and 3 compatible. 
+
+h2. Upgrading
+
+Existing users need not change anything from the upgrade from rails 2 to 3.
+
+h2. Caveats
+
+Only the following validations work:
+
+# validates_presence_of
+# validates_acceptance_of
+# validates_confirmation_of
+# validates_exclusion_of
+# validates_inclusion_of
+# validates_numericality_of
+# validates_format_of
+# validates_length_of
+
+validates_size_of does not work. Do use my "fork":http://rubygems.org/gems/liangzan-validation_reflection of the validation_reflection gem for it to work.
+
+The rest do not work as they depend on server queries.
+
+h2. Alternative implementations
+
+http://github.com/dnclabs/client_side_validations
+http://github.com/grimen/validatious-on-rails
+
+h2. Note on Patches/Pull Requests
+ 
+* Fork the project.
+* Make your feature addition or bug fix.
+* Add tests for it. This is important so I don't break it in a
+  future version unintentionally.
+* Commit, do not mess with rakefile, version, or history.
+  (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
+* Send me a pull request. Bonus points for topic branches.
+
+h2. Copyright
+
+Copyright (c) 2010 Wong Liang Zan. See LICENSE for details.
