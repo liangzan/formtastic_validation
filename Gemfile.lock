@@ -25,7 +25,12 @@ GEM
       actionpack (>= 2.3.7)
       activesupport (>= 2.3.7)
       i18n (~> 0.4)
+    git (1.2.5)
     i18n (0.5.0)
+    jeweler (1.5.2)
+      bundler (~> 1.0.0)
+      git (>= 1.2.5)
+      rake
     nokogiri (1.4.4)
     rack (1.2.1)
     rack-mount (0.6.13)
@@ -65,6 +70,7 @@ DEPENDENCIES
   actionpack
   activesupport
   formtastic
+  jeweler
   nokogiri
   rspec
   rspec-rails
