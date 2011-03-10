@@ -23,13 +23,14 @@ Jeweler::Tasks.new do |gem|
   # and development dependencies are only needed for development (ie running rake tasks, tests, etc)
   #  gem.add_runtime_dependency 'jabber4r', '> 0.1'
   gem.add_dependency "validation_reflection", "~> 1.0.0"
-  gem.add_dependency "formtastic", "~> 1.1.0"
-  gem.add_development_dependency "rspec", "= 1.3.0"
-  gem.add_development_dependency "rspec-rails", "= 1.3.2"
+  gem.add_dependency "formtastic", "~> 1.2.0"
+  gem.add_development_dependency "rails", "~> 3.0.0"
+  gem.add_development_dependency "rspec", "~> 2.5.0"
+  gem.add_development_dependency "rspec-rails", "~> 2.5.0"
   gem.add_development_dependency "rspec_tag_matchers", "= 1.0.0"
-  gem.add_development_dependency "nokogiri", "= 1.4.2"
-  gem.add_development_dependency "activesupport", "= 2.3.8"
-  gem.add_development_dependency "actionpack", "= 2.3.8"
+  gem.add_development_dependency "nokogiri", "~> 1.4.4"
+  gem.add_development_dependency "activesupport", "~> 3.0.0"
+  gem.add_development_dependency "actionpack", "~> 3.0.0"
 end
 Jeweler::RubygemsDotOrgTasks.new
 
