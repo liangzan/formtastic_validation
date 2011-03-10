@@ -1,6 +1,3 @@
-require 'rubygems'
-require 'active_support'
-
 module FormtasticValidation
 
   NAMESPACE = 'validation'
@@ -81,7 +78,11 @@ module FormtasticValidation
   def serialise_options(opts_hash)
     serialised_hash = Hash.new
     opts_hash.each do |key, value|
-      serialised_value = value.class.eql?(String) ? value : value.to_json
+      serialised_value = case value.class.to_s
+                         when "String" then value
+                         when "Regexp" then value.inspect
+                         else value.to_json
+                         end
       serialised_hash[key] = serialised_value
     end
     serialised_hash
