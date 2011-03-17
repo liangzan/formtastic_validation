@@ -17,6 +17,8 @@ tmtags
 coverage
 rdoc
 pkg
+log
+tmp
 
 ## PROJECT::SPECIFIC
 .rvmrc
