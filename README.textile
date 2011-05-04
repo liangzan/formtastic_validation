@@ -40,7 +40,7 @@ After that you need to add this to your application layout
 <pre>
   <head>
     <%= javascript_include_tag 'livevalidation-1.3.min' %>
-    <%= javascript_include_tag 'formtastic_validation-0.1.3.min' %>
+    <%= javascript_include_tag 'formtastic_validation-0.1.4.min' %>
     <script type="text/javascript">
       function initialize() {
           var formtasticValidation = new FormtasticValidation;
